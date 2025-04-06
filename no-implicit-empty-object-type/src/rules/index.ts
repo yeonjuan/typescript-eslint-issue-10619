@@ -1,5 +1,5 @@
-import { rule as noLoopOverEnums } from "./no-implicit-empty-object.js";
+import { rule as noImplicitEmptyObject } from "./no-implicit-empty-object.js";
 
 export const rules = {
-  "no-loop-over-enums": noLoopOverEnums,
+  "no-implicit-empty-object-type": noImplicitEmptyObject,
 };

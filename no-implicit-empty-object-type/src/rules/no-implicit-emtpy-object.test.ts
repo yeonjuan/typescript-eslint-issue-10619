@@ -30,6 +30,16 @@ ruleTester.run("no-loop-over-enum", rule, {
   invalid: [
     {
       code: `
+      type A = {};
+      `,
+      errors: [
+        {
+          messageId: "noImplicitEmptyObjectType",
+        },
+      ],
+    },
+    {
+      code: `
        type NullableData = null | { name: string;  num: number };
       type ITS_EMPTY_OBJECT_TYPE = Omit<NullableData, 'name'>; // '{}'
       `,

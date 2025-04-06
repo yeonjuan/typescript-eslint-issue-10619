@@ -17,7 +17,7 @@ const plugin = {
 
 const recommended = {
   plugins: {
-    "example-typed-linting": plugin,
+    "no-implicit-empty-object-type": plugin,
   },
   rules,
 };
