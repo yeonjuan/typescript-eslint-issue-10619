@@ -3,7 +3,7 @@ import tseslint from "typescript-eslint";
 import { RuleTester } from "@typescript-eslint/rule-tester";
 import * as vitest from "vitest";
 
-import { rule } from "./no-loop-over-enum.js";
+import { rule } from "./no-implicit-empty-object.js";
 
 RuleTester.afterAll = vitest.afterAll;
 RuleTester.it = vitest.it;
@@ -25,31 +25,17 @@ const ruleTester = new RuleTester({
 
 ruleTester.run("no-loop-over-enum", rule, {
   valid: [
-    `enum Values {}`,
-    `for (const a in []) {}`,
-    `for (const a of []) {}`,
-    `
-      const values = {};
-      for (const a in values) {}
-    `,
-    `
-      const values = [];
-      for (const a of values) {}
-    `,
+
   ],
   invalid: [
     {
       code: `
-          enum Values {}
-          for (const a in Values) {}
+       type NullableData = null | { name: string;  num: number };
+      type ITS_EMPTY_OBJECT_TYPE = Omit<NullableData, 'name'>; // '{}'
       `,
       errors: [
         {
-          column: 27,
-          endColumn: 33,
-          line: 3,
-          endLine: 3,
-          messageId: "loopOverEnum",
+          messageId: "noImplicitEmptyObjectType",
         },
       ],
     },
